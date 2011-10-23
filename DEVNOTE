@@ -1,0 +1,15 @@
+About features:
+As for the menu that pops up when user holds alt, I used to have it allow alt key combinations through[alt+o, enter would get you straight to the font options, for example], it was perfectly usable. The problem with having a menu take focus whenever alt is pressed is that gtk menus block window manager keyboard shortcuts, so alt+f4 for example, will be blocked. I don't know why the fuck GTK thinks this is good, or even why it's allowed by X.
+I misidentified the cause of the blocking as being the code I made to filter the key-events[was necessary for alt+o and kind to work] and stripped it out. It was a hack anyway though so I hope I never think I'll need it back.
+
+
+TODO:
+gotta hook mouse=cursor to movement events of the text view. There's a bug that happens when you search, seek to text off the bottom of the visible section that this should ply.
+
+might want to get mouse clicking working as a user would expect[at all]. Currently to select text you can just hold shift so you don't strictly need it.
+
+Might be a good idea to investigate the tax brought by simply moving the mouse in the feild. It's pretty ugly.
+
+Put the menu thing back into a bar. The problems you faced and overcame[then reverted for some reason] with this one should not be present in the same form as you thought.
+
+Start removing references to leafpad. In this I'm torn between wanting to because the original leafpad project might be offended by my changes, and not wanting to because it feels like I'm stripping away all the credit it deserves.

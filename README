@@ -1,8 +1,11 @@
 Leafpad - GTK+ based simple text editor
+-Or Sylphnote, rather.
 
 
 Description
 ===========
+
+Sylphnote unifies the text cursor and the mouse pointer. We believe this grants a productivity improvement. It is a hacked up version of Leafpad. To get the menu to appear, hold alt.
 
 Leafpad is a simple GTK+ text editor that emphasizes simplicity. As development
 focuses on keeping weight down to a minimum, only the most essential features
