@@ -1,15 +1,33 @@
 About features:
-As for the menu that pops up when user holds alt, I used to have it allow alt key combinations through[alt+o, enter would get you straight to the font options, for example], it was perfectly usable. The problem with having a menu take focus whenever alt is pressed is that gtk menus block window manager keyboard shortcuts, so alt+f4 for example, will be blocked. I don't know why the fuck GTK thinks this is good, or even why it's allowed by X.
+As for the menu that pops up when user holds alt, it should be clear that this autohiding behavior is present for ultra-minimalism. I used to have it allow alt key combinations through[alt+o, enter would get you straight to the font options, for example], it was perfectly usable. The problem with having a menu take focus whenever alt is pressed is that gtk menus block window manager keyboard shortcuts, so alt+f4 for example, will be blocked. I don't know why the fuck GTK thinks this is good, or even why it's allowed by X.
 I misidentified the cause of the blocking as being the code I made to filter the key-events[was necessary for alt+o and kind to work] and stripped it out. It was a hack anyway though so I hope I never think I'll need it back.
+
+The pointer-cursor unification is achieved by sister callbacks on_mouse_move and track_cursor_catch_typing. Each calls the other, though in different ways[one recursive, one results in the call happening after it concludes], so I established a locking system between them to prevent inconsistent effects.
 
 
 TODO:
-gotta hook mouse=cursor to movement events of the text view. There's a bug that happens when you search, seek to text off the bottom of the visible section that this should ply.
+gotta hook mouse=cursor to movement events of the text view. There's a bug that happens when you seek to text off the bottom of the visible section of a scrolling window where the pointer moves off the window that this should ply.
 
 might want to get mouse clicking working as a user would expect[at all]. Currently to select text you can just hold shift so you don't strictly need it.
+make control click select entire words[ctrl doubleclick does but that's pretty poor ergonomics really, since ctrl click was never assigned to anything]
+Holding shift doesn't work any more for some reason. Find out why you removed it. Augment it with ctrl shift for selecting words.
+
+add feature, if images present in configuration directory,
+	center.png: render the image in the background of the text
+	else:
+		upperright.png:
+			lowerleft.png: render the images at each corner of the window, unless there isn't room, in which case just render one.
+		else:
+		upperleft:
+			lowerright: similar to above.
+the rationale is that my windows are just /too/ minimal. In my borderless window manager for instance fails to distinguish my sylphnote windows from my white background. Simply rendering an image in the center would solve this well enough, but corners would be more sensible.
 
 Might be a good idea to investigate the tax brought by simply moving the mouse in the feild. It's pretty ugly.
 
-Put the menu thing back into a bar. The problems you faced and overcame[then reverted for some reason] with this one should not be present in the same form as you thought.
+Put the menu thing back into a bar. The problems you faced and overcame[then reverted for some reason] with this one should not be present in the same form as you thought. Though the problem of making a menubar autohide is not garunteed to be easily solvable.
 
 Start removing references to leafpad. In this I'm torn between wanting to because the original leafpad project might be offended by my changes, and not wanting to because it feels like I'm stripping away all the credit it deserves.
+
+Other known inconsistencies:
+	sometimes the mouse pointer's visible when you type, sometimes not. WTF.
+	It's not possible to mouse-cursor into an empty line. WTF.
